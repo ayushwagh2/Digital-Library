@@ -1,4 +1,53 @@
  
+ .form-control {
+   border: transparent;
+   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+   border: none; }
+   .form-control:active, .form-control:focus, .form-control:hover {
+     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
+ 
+ .btn {
+   border-radius: 4px;
+   border: none; }
+   .btn:active, .btn:focus {
+     outline: none;
+     -webkit-box-shadow: none !important;
+     box-shadow: none !important; }
+ 
+ .custom-select {
+   border: none;
+   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
+   .custom-select:active, .custom-select:focus, .custom-select:hover {
+     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
+ 
+ .bg-image {
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat; }
+ 
+ .logo img {
+   width: 70px; }
+ 
+ .custom-note {
+   color: #999; }
+   .custom-note a {
+     color: #555;
+     font-weight: 900 !important; }
+/* 
+
+-------------------------------------------------------------------------plz delte later if sidebar is nto used------------------------------- */
+
+
+/*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
  :root {
   --blue: #007bff;
   --indigo: #6610f2;
