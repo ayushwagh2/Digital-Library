@@ -1,1 +1,1 @@
-web gunicorn django_project.wsgi:application --log-file -
+web: python manage.py migrate && gunicorn mysite.wsgi
