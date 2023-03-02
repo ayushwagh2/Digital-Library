@@ -1,0 +1,39 @@
+{% extends "blog/basewithsidebar.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ object.author }}</a>
+        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+      </div>
+      <h2 class="article-title">{{ object.description }}</h2>
+      
+    </div>
+    
+    <br/><br/>
+    <hr>
+    <br/>
+    <form action="{% url 'like_post' document.pk %}" method="POST">
+      {% csrf_token %}
+      <!-- <button type="submit", name="document_id", value="{{ document.id }}", class="btn btn-primary btn-sm" >Like</button> -->
+    </form>
+    
+    
+    
+  </article>
+
+  {% endblock content %}
+  
+  <!-- #<a href="{% url 'show_recommendations ' document.id %}" class="btn btn-outline-primary"> Favourties</a> -->
+  <a href="{% url 'favourite_add' document.id %}" class="btn btn-outline-primary">
+    Favourties</a>
+    
+    {% if object.author == user %}
+    <div>
+      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+      <p class="article-content">{{ object.pdf }}</p>
+      <a class="btn btn-primary" href="/media/{{ object.pdf }}" target="_blank">Link</a>
+      </div>
+    {% endif %}

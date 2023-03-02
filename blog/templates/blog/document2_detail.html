@@ -1,0 +1,197 @@
+{% extends "blog/basewithsidebar.html" %}
+{% block content %}
+ 
+<style 
+>
+  button {  
+  position: relative;
+  font-size: 1.2em;
+  padding: 0.7em 1.4em;
+  background-color: #BF0426;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5em;
+  color: #DEDEDE;
+ box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3); 
+}
+
+button::before {
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgb(245 245 245) 0%, rgb(255 255 255) 50%, #ffc107 50%, #ffc107 60%);
+  border-radius: 0 0 0.5em 0;
+  box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+button:hover::before {
+  width: 1.6em;
+  height: 1.6em;
+}
+
+button:active {
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+  transform: translate(0.1em, 0.1em);
+} 
+  .card {
+    width: 527px;
+    height: 400px;
+    border-radius: 20px;
+    background: #f5f5f5;
+    position: relative;
+    padding: 1.8rem;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+   }
+   
+   .card-details {
+    color: black;
+    height: 100%;
+    gap: 0em;
+    display: grid;
+    place-content: center;
+   }
+   
+   .card-button {
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #008bf8;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+   }
+   
+   .text-body {
+    color: rgb(134, 134, 134);
+    margin-bottom: 0%;
+   }
+   
+   /*Text*/
+   .text-title {
+    font-size: 1.5em;
+    font-weight: bold;
+   }
+   
+   /*Hover*/
+   .card:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+   }
+   
+   .card:hover .card-button {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+   }
+
+   
+
+  
+  </style>
+ 
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class=" ">
+        <div class="card mt-3">
+        <div class="px-2 d-flex" >
+          <img class="rounded-circle shadow-4-strong" width="50px" src="{{ object.author.profile.image.url }}" alt="">
+          
+            </div>
+        <div class="ms-2 c-details">
+            <h6 class="mb-0">{{ user.username }}</h6> <span>{{ object.date_posted|date:"F d, Y" }}</span>
+             
+        </div>
+        <div class="card-details">
+          <p class="text-title">{{ object.description }}</p>
+          <p class="text-body  ">{{object.stream}}</p>
+          <p class="text-body  ">{{object.year}}</p>
+    
+         
+          
+           
+    
+        </div>
+        <a href="/media/{{ object.pdf }}"  target="_blank" ><button class="card-button">Link </button></a>
+        </div>
+      
+        <div class="container" style="margin-top: 50px;">
+        <div class="row">
+          <div class="col-sm">
+            <a href="{% url 'post-delete' object.id %}"><lord-icon
+              src="https://cdn.lordicon.com/jmkrnisz.json"
+              trigger="loop-on-hover"
+              delay="2000"
+              style="width:150px;height:250px">
+
+            </lord-icon></a>
+            <span>Delete</span>
+          </div>
+          <div class="col-sm">
+            <a href="{% url 'post-update' object.id %}" ><lord-icon
+              src="https://cdn.lordicon.com/ogkplaef.json"
+              trigger="hover"
+              style="width:150px;height:250px">
+          </lord-icon> </a>
+          <span>Update</span>
+          
+          </div>
+          <div class="col-sm">
+            <a href="{% url 'favourite_add' object.id %}">
+              <lord-icon
+              src="https://cdn.lordicon.com/eanmttmw.json"
+              trigger="hover"
+              style="width: 150px;height:250px">
+            </lord-icon>
+            
+            </a>
+            <span>Bookmark</span>
+          </div>
+          </div>
+        </div>
+    
+    </div >
+    
+    </div>
+    <div class="container">
+    </div>
+    <!-- <div class="col">
+      <div class="w-50" style="width: 300px;"> 
+        
+      
+      </div>
+      
+      <div class="w-50" style="width: 300px;">
+      
+      </div>
+    </div> -->
+  </div>  
+<script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+
+
+
+<script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+
+ 
+
+ 
+{% endblock content %}
+  <ul>
+    {% for recommended_document in recommended_documents %}
+        <li><a href="{{ recommended_document.get_absolute_url }}">{{ recommended_document.title }}</a></li>
+        <button class="btn btn-primary-lg" href="{{ recommended_document.get_absolute_url }}"></button>
+    {% empty %}
+        <li>No recommended documents found.</li>
+    {% endfor %}
+  </ul>

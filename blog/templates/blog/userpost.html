@@ -1,0 +1,131 @@
+{% extends "blog/basewithsidebar.html" %}
+{% block content %}
+ 
+{% for document in user_posts %}
+<style 
+>
+  button {  
+  position: relative;
+  font-size: 1.2em;
+  padding: 0.7em 1.4em;
+  background-color: #BF0426;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5em;
+  color: #DEDEDE;
+ box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3); 
+}
+
+button::before {
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgb(245 245 245) 0%, rgb(255 255 255) 50%, #ffc107 50%, #ffc107 60%);
+  border-radius: 0 0 0.5em 0;
+  box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+button:hover::before {
+  width: 1.6em;
+  height: 1.6em;
+}
+
+button:active {
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+  transform: translate(0.1em, 0.1em);
+} 
+  .card {
+    width: 300px;
+    height: 400px;
+    border-radius: 20px;
+    background: #f5f5f5;
+    position: relative;
+    padding: 1.8rem;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+   }
+   
+   .card-details {
+    color: black;
+    height: 100%;
+    gap: .5em;
+    display: grid;
+    place-content: center;
+   }
+   
+   .card-button {
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #008bf8;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+   }
+   
+   .text-body {
+    color: rgb(134, 134, 134);
+    margin-bottom: 0%;
+   }
+   
+   /*Text*/
+   .text-title {
+    font-size: 1.5em;
+    font-weight: bold;
+   }
+   
+   /*Hover*/
+   .card:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+   }
+   
+   .card:hover .card-button {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+   }
+
+   
+
+  
+  </style>
+
+  
+<div class="col-md-3 mt-5 d-flex justify-content-center">
+    <div class="card mt-3">
+    <div class="px-2 " >
+      <img class="rounded-circle shadow-4-strong" width="50px" src="{{ document.author.profile.image.url }}" alt="">
+        </div>
+    <div class="ms-2 c-details">
+        <h6 class="mb-0">{{ user.username }}</h6> <span>{{ document.date_posted|date:"F d, Y" }}</span>
+         
+    </div>
+		<div class="card-details">
+		  <p class="text-title">{{ document.description }}</p>
+		  <p class="text-body  ">{{document.stream}}</p>
+		  <p class="text-body  ">{{document.year}}</p>
+     
+      <p href="{% url 'category' document.category%}">{{ document.category}}</p>
+     
+		</div>
+		<a href="{% url 'post-detail' document.id %}" ><button class="card-button" >More info</button></a>
+	  </div>
+</div>
+{% endfor %}
+
+
+
+ 
+{% endblock content %}
+

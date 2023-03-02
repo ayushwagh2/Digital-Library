@@ -1,0 +1,20 @@
+{% extends "blog/basewithsidebar.html" %}
+{% block content %}
+<h1>Recommendations for "{{ document.title }}"</h1>
+
+{% if recommended_documents %}
+  <ul>
+  {% for recommended_document in recommended_documents %}
+    <li><a href="{{ recommended_document.get_absolute_url }}">{{ recommended_document.title }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No recommendations found.</p>
+{% endif %}
+
+
+
+
+ 
+{% endblock content %}
+

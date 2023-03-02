@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="blog/static/blog/css/style.css" >
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Baloo&display=swap');
+
+body{
+    font-family: 'Baloo', cursive;
+}
+/* home css */
+
+.file {
+    position: relative;
+  }
+  .file label {
+    background: #39D2B4;
+    padding: 5px 20px;
+    color: #fff;
+    font-weight: bold;
+    font-size: .9em;
+    transition: all .4s;
+  }
+  .file input {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    top: 0;
+    opacity: 0.01;
+    cursor: pointer;
+  }
+  .file input:hover + label,
+  .file input:focus + label {
+    background: #34495E;
+    color: #39D2B4;
+  }
+  form {
+    width: 225px;
+    margin: 30 auto;
+    text-align:center;
+  }
+  
+  a{
+      color:black;
+  }
+  a:hover{
+    color: #39D2B4;
+  }
+  h1, h2 {
+    margin-bottom: 5px;
+    font-weight: normal;
+    text-align: center;
+    color:#aaa;
+  }
+  h2 {
+    margin: 5px 0 2em;
+    color: #39D2B4;
+  }
+  h2 + P {
+    text-align: center;
+  }
+  input[type="text"]::placeholder {  
+                  
+    /* Firefox, Chrome, Opera */ 
+    text-align: center; 
+} 
+  .txtcenter {
+    margin-top: 4em;
+    font-size: .9em;
+    text-align: center;
+    color: #aaa;
+  }
+  .copy {
+   margin-top: 2em; 
+  }
+  .copy a {
+   text-decoration: none;
+   color: #39D2B4;
+  }
+  /* button */
+  .btn {
+    border-radius: 5px;
+    padding: 15px 25px;
+    font-size: 22px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .btn:active {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    box-shadow: 0px 1px 0px 0px;
+  }
+  
+  .blue {
+    background-color: #55acee;
+    box-shadow: 0px 5px 0px 0px #3C93D5;
+  }
+  
+  .blue:hover {
+    background-color: #6FC6FF;
+  }
+
+  .cards:hover{ 
+    box-shadow: 1px 8px 20px grey;
+   
+ }
+  
+/* document css */
+  .single-chart {
+    width: 33%;
+    justify-content: space-around ;
+  }
+  
+  .circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    max-height: 250px;
+  }
+  
+  .circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+  }
+  
+  .circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+  }
+  
+  @keyframes progress {
+    0% {
+      stroke-dasharray: 0 100;
+    }
+  }
+  
+  .circular-chart.orange .circle {
+    stroke: #ff9f00;
+  }
+  
+  .circular-chart.green .circle {
+    stroke: #4CC790;
+  }
+  
+  .circular-chart.blue .circle {
+    stroke: #3c9ee5;
+  }
+  
+  .percentage {
+    fill: rgb(255, 255, 255);
+    font-family: sans-serif;
+    font-size: 0.5em;
+    text-anchor: middle;
+  }
+
+
+        </style>
+     
+    </head>
+    <body>
+        <div class="container pt-5">
+            <h1>Add a post</h1>
+            <h2>Please add a Post</h2>
+           
+            <!-- i have commented this so that i can try to use the django form with the bootstrap method is it working
+
+               <form method="POST" id="post" enctype="multipart/form-data">
+
+
+                {% csrf_token %}
+                <div class="form-group">
+                <label for="text">Description about comparing</label>
+                <input type="text" class="form-control" name="description" placeholder="description">
+                
+                </div>
+                <p class="file">
+                        <input type="file" name="document"/> <span class="selected-1"></span>
+                        <label for="file">Upload main file</label>
+                        
+                </p>
+                     <p class="file">
+                        <input type="file" name="document2"/> <span class="selected-2"></span>
+                        <label for="file">Upload query file</label>
+                </p>  
+                
+                <button type="submit" class="btn blue">Upload</button>
+            </form> -->
+
+            <div class="content-section">
+              <form method="POST"  enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                      <legend class="border-bottom mb-8">Blog Post</legend>
+                      {{ form.as_p }}
+                  </fieldset>
+                  <div class="form-group">
+                      <button class="btn btn-outline-info" type="submit">Post</button>
+                  </div>
+              </form>
+          </div>
+
+            <div class="row mb-2 posts">
+                    {% for document in documents %}
+                    <div class="col-md-6">
+                        <div class="cards">
+                            <a href="{% url 'post-detail' document.id %}" style=" text-decoration: none;">
+                                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                    <div class="col p-4 d-flex flex-column position-static">
+                                        <h3 class="mb-0">{{document.id}}</h3>
+                                        <p class="mb-auto">{{document.description}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+
+    </body>
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>	
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input[name="document"]').change(function(e){
+                var fileName = e.target.files[0].name;
+                $('.selected-1').prepend('Selected:' + ' ' + fileName)
+            });
+
+            $('input[name="document2"]').change(function(e){
+                var fileName = e.target.files[0].name;
+                $('.selected-2').prepend('Selected:' + ' ' + fileName)
+            });
+        });
+    </script>
+</html>
