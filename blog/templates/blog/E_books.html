@@ -8,7 +8,7 @@
 </div>
  
 
- 
+{% if document2_filter %}
 {% for document in document2_filter.qs %}
 <style 
 >
@@ -61,7 +61,7 @@ button:active {
    .card-details {
     color: black;
     height: 100%;
-    gap: 0rem;
+    gap: .5em;
     display: grid;
     place-content: center;
    }
@@ -108,33 +108,31 @@ button:active {
 
   
   </style>
-
-  
   <div class="col-md-3 mt-5 d-flex justify-content-center">
     <div class="card mt-3">
     <div class="px-2 " >
       <img class="rounded-circle shadow-4-strong" width="50px" src="{{ document.author.profile.image.url }}" alt="">
         </div>
     <div class="ms-2 c-details">
-        <h6 class="mb-0">{{ document.author.username }}</h6> <span>{{ document.date_posted|date:"F d, Y" }}</span>
+        <h6 class="mb-0">{{ user.username }}</h6> <span>{{ document.date_posted|date:"F d, Y" }}</span>
          
     </div>
 		<div class="card-details">
-
 		  <p class="text-title">{{ document.description }}</p>
 		  <p class="text-body  ">{{document.stream}}</p>
 		  <p class="text-body  ">{{document.year}}</p>
-		  <p class="text-body  ">{{document.course}}</p>
      
-      <p class="text-body">{{ document.category}}</p>
+      <p href="{% url 'category' document.category%}">{{ document.category}}</p>
      
 		</div>
 		<a href="{% url 'post-detail' document.id %}" ><button class="card-button" >More info</button></a>
 	  </div>
 </div>
 {% endfor %}
-
-
-
- 
+{% else %}
+    <h2>No documents found for category 'Science'</h2>
+    <h1 style="color:#f1c50e;"> Click the submit button again</h1>
+{% endif %}
 {% endblock content %}
+
+
