@@ -20,47 +20,7 @@ def home(request):
      
    
     return render(request, 'blog/nicepage.html',  ) 
-
-
-# def home(request):
-#     first_category = Category2.objects.get(name='newcategory')
-#     documents_in_first_category = Document2.objects.filter(category=first_category)
-#     return render(request, 'blog/home.html', {'documents': documents_in_first_category})
-
-#     # context = {
-#     #     question_paper_category = Category2.objects.get(name='first_category')
-#     #     question_paper_documents = Document2.objects.filter(category=first_category)
-#     #     'documents': Document2.objects.filter(category = my_category)
-#     # }
-#     # return render(request, 'blog/home.html', context)
-
- 
-# def Science(request):
-#     first_category = Stream.objects.get(name='Science')
-#     document2 = Document2.objects.filter(stream=first_category)
-#     document2_filter = Document2Filter4(request.GET, queryset=document2)
-#     context = {
-#         'document2_filter': document2_filter
-#     }
-#     return render(request, "blog/Science.html", context)
-
-# def Science(request):
-#     first_category = Stream.objects.get(name='Science')
-#     document2 = Document2.objects.filter(stream=first_category)
-#     document2_filter = Document2Filter4(request.GET, queryset=document2)
-
-#     context = {}
-#     if document2_filter.qs.exists():
-#         # add the filtered queryset to the context dictionary
-#         context['document2_filter'] = document2_filter
-#     else:
-#         # print a statement when no objects of the filtered category exist
-#         print("No documents found for category 'Science'")
-#         # add an empty queryset to the context dictionary
-#         context['document2_filter'] = Document2.objects.none()
-
-#     return render(request, "blog/Science.html", context)
-
+  
 
 def Science(request):
     first_category = Stream.objects.get(name='Science')
@@ -82,73 +42,139 @@ def Science(request):
     return render(request, "blog/Science.html", context)
 
 
-
-
-
 def Commerce(request):
     first_category = Stream.objects.get(name='Commerce')
     document2 = Document2.objects.filter(stream=first_category)
     document2_filter = Document2Filter4(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
+
+    filtered_documents = document2_filter.qs.filter(stream=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category 'Science'")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
     return render(request, "blog/Commerce.html", context)
+
 
 def Arts(request):
     first_category = Stream.objects.get(name='Arts')
     document2 = Document2.objects.filter(stream=first_category)
     document2_filter = Document2Filter4(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
-    return render(request, "blog/Arts.html", context)
 
+    filtered_documents = document2_filter.qs.filter(stream=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category Arts")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
+    return render(request, "blog/Arts.html", context)
 
 def Non_Fiction(request):
     first_category = Category2.objects.get(name='Non_Fiction')
     document2 = Document2.objects.filter(category=first_category)
-    document2_filter = Document2Filter1(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
+    document2_filter = Document2Filter4(request.GET, queryset=document2)
+
+    filtered_documents = document2_filter.qs.filter(category=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category 'Science'")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
     return render(request, "blog/Non_fiction.html", context)
 
 def Questionpaper(request):
     first_category = Category2.objects.get(name='Questionpapers')
     document2 = Document2.objects.filter(category=first_category)
-    document2_filter = Document2Filter1(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
+    document2_filter = Document2Filter4(request.GET, queryset=document2)
+
+    filtered_documents = document2_filter.qs.filter(category=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category 'Science'")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
     return render(request, "blog/Questionpaper.html", context)
 
 def Notes(request):
     first_category = Category2.objects.get(name='Notes')
     document2 = Document2.objects.filter(category=first_category)
-    document2_filter = Document2Filter1(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
-    return render(request, "blog/Notes.html", context)
+    document2_filter = Document2Filter4(request.GET, queryset=document2)
 
+    filtered_documents = document2_filter.qs.filter(category=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category 'Science'")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
+    return render(request, "blog/Notes.html", context)
 def Fiction(request):
     first_category = Category2.objects.get(name='Fiction')
     document2 = Document2.objects.filter(category=first_category)
-    document2_filter = Document2Filter1(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
-    return render(request, "blog/Fiction.html", context)
+    document2_filter = Document2Filter4(request.GET, queryset=document2)
 
+    filtered_documents = document2_filter.qs.filter(category=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category 'Science'")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
+    return render(request, "blog/Fiction.html", context)
+ 
 def E_books(request):
     first_category = Category2.objects.get(name='E_books')
     document2 = Document2.objects.filter(category=first_category)
-    document2_filter = Document2Filter1(request.GET, queryset=document2)
-    context = {
-        'document2_filter': document2_filter
-    }
-    return render(request, "blog/E_books.html", context)
+    document2_filter = Document2Filter4(request.GET, queryset=document2)
 
+    filtered_documents = document2_filter.qs.filter(category=first_category)
+
+    context = {}
+    if filtered_documents.exists():
+        # add the filtered queryset to the context dictionary
+        context['document2_filter'] = document2_filter
+    else:
+        # print a statement when no objects of the filtered category exist
+        print("No documents found for category 'Science'")
+        # add an empty queryset to the context dictionary
+        context['document2_filter'] = Document2.objects.none()
+
+    return render(request, "blog/E_books.html", context)
+  
 def new_view(request):
     document2 = Document2.objects.all()
     document2_filter = Document2Filter(request.GET, queryset=document2)
@@ -156,8 +182,7 @@ def new_view(request):
         'document2_filter': document2_filter
     }
     return render(request, "blog/filter.html", context)
-
-
+ 
 class PostListView(ListView):
     model = Document2
     template_name = 'blog/home.html '  # <app>/<model>_<viewtype>.html
@@ -173,6 +198,16 @@ class PostListView(ListView):
  
 
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy   
+from .forms import YourModelForm
+
+class PostCreateView(CreateView):
+    model = Document2
+    form_class = YourModelForm
+    template_name = 'blog/pdfupload.html'
+    
+    success_url = reverse_lazy('blog-home') 
+
 
 class PostDetailView(DetailView):
     model = Document2
@@ -216,27 +251,11 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
-
-
+ 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
-
-from .forms import DocumentForm
-#instead of Post_Create view i am using this to upload the document
-def document_upload(request):
-    documents = Document2.objects.order_by('-id')
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.instance.author = request.user
-            form.save()
-            return redirect('blog-home')
-    else:
-        form = DocumentForm()
-    return render(request, 'blog/pdfupload.html', {
-        'form': form,
-        'documents':documents,
-    })
+ 
+ 
 
 #this is adding a category form that takle ka tutorial
 from .models import Category2
@@ -268,15 +287,7 @@ def favourite_add(request, id):
         document.favourites.add(request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-
-# @login_required
-# def favourite_add2(request, id):
-#     document = get_object_or_404(Document2, id=id )
-#     if document.favourites.filter(id=request.user.id).exists():
-#         document.favourites.remove(request.user)
-#     else:
-#         document.favourites.add(request.user)
-#     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+ 
 
 @login_required
 def favourite_list(request):
@@ -331,5 +342,5 @@ def user_info(request):
             user_info = UserInfo(name=name, email=email, phone_number=phone_number)
             user_info.save()
             # Render a success page
-            return render(request, 'success.html')
+            return render(request, 'blog/nicepage.html')
     return render(request, 'blog/user_info.html', {'form': form})

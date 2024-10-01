@@ -3,7 +3,7 @@ from .views import (
     PostListView,
     PostDetailView,
     
-    #PostCreateView2,
+    PostCreateView,
     PostUpdateView,
     PostDeleteView,
     AddCategoryView,
@@ -24,7 +24,7 @@ urlpatterns = [
 
     path('document/<int:pk>/', PostDetailView.as_view(), name='post-detail'),#this is the detail of the post view using a class based view
      
-    path('Pdfupload/', views.document_upload, name='documentupload'),#To upload a Document
+    path('Pdfupload/',PostCreateView.as_view() , name='documentupload'),#To upload a Document
 
     path('document/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),#to update a document
     
